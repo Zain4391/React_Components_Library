@@ -1,0 +1,286 @@
+@import "tailwindcss";
+
+/* ============================================================
+   DESIGN TOKENS — Component Library
+   Palette: Olive · Burnt Orange · Sand · Near-Black · Gray
+   ============================================================ */
+
+:root {
+  --text: #6b6375;
+  --text-h: #08060d;
+  --bg: #fff;
+  --border: #e5e4e7;
+  --code-bg: #f4f3ec;
+  --accent: #aa3bff;
+  --accent-bg: rgba(170, 59, 255, 0.1);
+  --accent-border: rgba(170, 59, 255, 0.5);
+  --social-bg: rgba(244, 243, 236, 0.5);
+  --shadow:
+    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+
+  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #9ca3af;
+    --text-h: #f3f4f6;
+    --bg: #16171d;
+    --border: #2e303a;
+    --code-bg: #1f2028;
+    --accent: #c084fc;
+    --accent-bg: rgba(192, 132, 252, 0.15);
+    --accent-border: rgba(192, 132, 252, 0.5);
+    --social-bg: rgba(47, 48, 58, 0.5);
+    --shadow:
+      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  }
+
+  #social .button-icon {
+    filter: invert(1) brightness(2);
+  }
+}
+
+#root {
+  width: 1126px;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  border-inline: 1px solid var(--border);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+h1,
+h2 {
+  font-family: var(--heading);
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+h1 {
+  font-size: 56px;
+  letter-spacing: -1.68px;
+  margin: 32px 0;
+  @media (max-width: 1024px) {
+    font-size: 36px;
+    margin: 20px 0;
+  }
+}
+h2 {
+  font-size: 24px;
+  line-height: 118%;
+  letter-spacing: -0.24px;
+  margin: 0 0 8px;
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
+}
+p {
+  margin: 0;
+}
+
+code,
+.counter {
+  font-family: var(--mono);
+  display: inline-flex;
+  border-radius: 4px;
+  color: var(--text-h);
+}
+
+code {
+  font-size: 15px;
+  line-height: 135%;
+  padding: 4px 8px;
+  background: var(--code-bg);
+}
+
+/* ============================================================
+   DESIGN TOKENS — Component Library
+   Palette: Olive · Burnt Orange · Sand · Near-Black · Gray
+   ============================================================ */
+
+:root {
+  /* --- Raw palette --- */
+  --olive:          #4b5320;
+  --olive-light:    #6b7530;
+  --olive-dark:     #323814;
+  --olive-muted:    #4b532033;
+
+  --burnt:          #704214;
+  --burnt-light:    #8f5520;
+  --burnt-dark:     #4d2d0d;
+  --burnt-muted:    #70421433;
+
+  --sand:           #eaddca;
+  --sand-light:     #f5efe4;
+  --sand-dark:      #d4c4aa;
+  --sand-muted:     #eaddca55;
+
+  --near-black:     #0d0d0d;
+  --gray:           #aaaaaa;
+  --gray-light:     #d0d0d0;
+  --gray-dark:      #666666;
+  --gray-muted:     #aaaaaa22;
+
+  /* --- Semantic: Backgrounds --- */
+  --color-bg:           #f5efe4;
+  --color-surface:      #eaddca;
+  --color-surface-raised: #ffffff;
+  --color-overlay:      rgba(13,13,13,0.45);
+
+  /* --- Semantic: Text --- */
+  --color-text-primary:   #0d0d0d;
+  --color-text-secondary: #4b5320;
+  --color-text-muted:     #666666;
+  --color-text-inverse:   #f5efe4;
+  --color-text-on-accent: #f5efe4;
+
+  /* --- Semantic: Borders --- */
+  --color-border:         #d4c4aa;
+  --color-border-strong:  #aaaaaa;
+  --color-border-focus:   #4b5320;
+
+  /* --- Semantic: Accent (Primary action — Olive) --- */
+  --color-accent:         #4b5320;
+  --color-accent-hover:   #6b7530;
+  --color-accent-active:  #323814;
+  --color-accent-subtle:  #4b532018;
+
+  /* --- Semantic: Secondary accent (Burnt orange) --- */
+  --color-secondary:        #704214;
+  --color-secondary-hover:  #8f5520;
+  --color-secondary-active: #4d2d0d;
+  --color-secondary-subtle: #70421418;
+
+  /* --- Semantic: Status --- */
+  --color-success:        #3a6b2a;
+  --color-success-subtle: #3a6b2a18;
+  --color-warning:        #704214;
+  --color-warning-subtle: #70421418;
+  --color-danger:         #8b2020;
+  --color-danger-subtle:  #8b202018;
+  --color-info:           #1a4a6b;
+  --color-info-subtle:    #1a4a6b18;
+
+  /* --- Spacing --- */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* --- Radii --- */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-full: 9999px;
+
+  /* --- Typography --- */
+  --font-sans:  'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono:  'JetBrains Mono', 'Fira Code', monospace;
+
+  --text-xs:   12px;
+  --text-sm:   14px;
+  --text-base: 16px;
+  --text-lg:   18px;
+  --text-xl:   20px;
+  --text-2xl:  24px;
+
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-bold:    600;
+
+  --leading-tight:  1.25;
+  --leading-normal: 1.5;
+  --leading-loose:  1.75;
+
+  /* --- Shadows --- */
+  --shadow-sm:  0 1px 2px rgba(13,13,13,0.08);
+  --shadow-md:  0 4px 12px rgba(13,13,13,0.10);
+  --shadow-lg:  0 8px 24px rgba(13,13,13,0.14);
+
+  /* --- Transitions --- */
+  --duration-fast:   120ms;
+  --duration-normal: 200ms;
+  --duration-slow:   350ms;
+  --ease-default:    cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================================
+   DARK MODE
+   ============================================================ */
+
+.dark, [data-theme="dark"] {
+  /* Backgrounds */
+  --color-bg:           #0d0d0d;
+  --color-surface:      #1a1a14;
+  --color-surface-raised: #242418;
+  --color-overlay:      rgba(0,0,0,0.65);
+
+  /* Text */
+  --color-text-primary:   #eaddca;
+  --color-text-secondary: #aaaaaa;
+  --color-text-muted:     #666666;
+  --color-text-inverse:   #0d0d0d;
+  --color-text-on-accent: #eaddca;
+
+  /* Borders */
+  --color-border:         #2a2a20;
+  --color-border-strong:  #3a3a2e;
+  --color-border-focus:   #6b7530;
+
+  /* Accent — olive brightens slightly on dark */
+  --color-accent:         #6b7530;
+  --color-accent-hover:   #7d8a38;
+  --color-accent-active:  #4b5320;
+  --color-accent-subtle:  #4b532028;
+
+  /* Secondary — burnt orange brightens on dark */
+  --color-secondary:        #8f5520;
+  --color-secondary-hover:  #a86828;
+  --color-secondary-active: #704214;
+  --color-secondary-subtle: #70421428;
+
+  /* Status */
+  --color-success:        #4a8b3a;
+  --color-success-subtle: #4a8b3a20;
+  --color-warning:        #8f5520;
+  --color-warning-subtle: #8f552020;
+  --color-danger:         #b03030;
+  --color-danger-subtle:  #b0303020;
+  --color-info:           #2a6a9b;
+  --color-info-subtle:    #2a6a9b20;
+
+  /* Shadows deepen on dark */
+  --shadow-sm:  0 1px 2px rgba(0,0,0,0.30);
+  --shadow-md:  0 4px 12px rgba(0,0,0,0.40);
+  --shadow-lg:  0 8px 24px rgba(0,0,0,0.55);
+}
