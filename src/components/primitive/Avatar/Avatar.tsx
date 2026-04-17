@@ -1,57 +1,64 @@
-import { forwardRef } from 'react';
-import { cva } from 'class-variance-authority';
-import type { AvatarProps } from '../../../types/Avatar.types';
+import { forwardRef } from "react";
+import { cva } from "class-variance-authority";
+import type { AvatarProps } from "../../../types/Avatar.types";
 
 const avatarVariants = cva(
   [
-    'relative inline-flex items-center justify-center rounded-[var(--radius-full)] overflow-hidden bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-primary)]',
-    'select-none shrink-0'
-  ].join(' '),
+    "relative inline-flex items-center justify-center rounded-[var(--radius-full)] overflow-hidden bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-primary)]",
+    "select-none shrink-0",
+  ].join(" "),
   {
     variants: {
       size: {
-        sm: 'w-8 h-8 text-[var(--text-xs)]',
-        md: 'w-10 h-10 text-[var(--text-sm)]',
-        lg: 'w-12 h-12 text-[var(--text-base)]',
-        xl: 'w-16 h-16 text-[var(--text-lg)]',
+        sm: "w-8 h-8 text-[var(--text-xs)]",
+        md: "w-10 h-10 text-[var(--text-sm)]",
+        lg: "w-12 h-12 text-[var(--text-base)]",
+        xl: "w-16 h-16 text-[var(--text-lg)]",
       },
     },
     defaultVariants: {
-      size: 'md',
+      size: "md",
     },
-  }
+  },
 );
 
-export const Avatar = forwardRef<HTMLSpanElement, AvatarProps & React.HTMLAttributes<HTMLSpanElement>>(
-  ({ variant = 'image', size = 'md', src, alt, initials, className, ...props }, ref) => {
-
+export const Avatar = forwardRef<
+  HTMLSpanElement,
+  AvatarProps & React.HTMLAttributes<HTMLSpanElement>
+>(
+  (
+    { variant = "image", size = "md", src, alt, initials, className, ...props },
+    ref,
+  ) => {
     // Determine the actual variant based on props provided if variant is not explicitly fallback
     let currentVariant = variant;
-    if (currentVariant === 'image' && !src) {
-      currentVariant = initials ? 'initials' : 'fallback';
+    if (currentVariant === "image" && !src) {
+      currentVariant = initials ? "initials" : "fallback";
     }
 
     return (
       <span
         ref={ref}
-        className={[avatarVariants({ size }), className || ''].join(' ')}
+        className={[avatarVariants({ size }), className || ""].join(" ")}
         {...props}
       >
-        {currentVariant === 'image' && src ? (
+        {currentVariant === "image" && src ? (
           <img
             src={src}
-            alt={alt || ''}
+            alt={alt || ""}
             className="w-full h-full object-cover"
             onError={(e) => {
               // Simple fallback if image fails to load
-              (e.target as HTMLImageElement).style.display = 'none';
+              (e.target as HTMLImageElement).style.display = "none";
             }}
           />
-        ) : currentVariant === 'initials' && initials ? (
-          <span className="font-medium uppercase leading-none">{initials.slice(0, 2)}</span>
+        ) : currentVariant === "initials" && initials ? (
+          <span className="font-medium uppercase leading-none">
+            {initials.slice(0, 2)}
+          </span>
         ) : (
           <svg
-            className="w-full h-full text-[var(--color-text-muted)]"
+            className="w-full h-full text-(--color-text-muted)"
             fill="currentColor"
             viewBox="0 0 24 24"
           >
@@ -60,6 +67,6 @@ export const Avatar = forwardRef<HTMLSpanElement, AvatarProps & React.HTMLAttrib
         )}
       </span>
     );
-  }
+  },
 );
-Avatar.displayName = 'Avatar';
+Avatar.displayName = "Avatar";
