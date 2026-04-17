@@ -1,0 +1,1 @@
+# Dummy pre commit script
