@@ -4,8 +4,8 @@ import type { ToastProps } from '../../../types/Toast.types';
 
 const toastVariants = cva(
   [
-    'flex items-center justify-between gap-3 min-w-[300px] max-w-md p-4 rounded-md shadow-[var(--shadow-md)] border',
-    'text-[var(--text-sm)] font-medium transition-all duration-[var(--duration-normal)]'
+    'flex items-center justify-between gap-3 min-w-[300px] max-w-md p-4 rounded-lg shadow-[var(--shadow-md)] border',
+    'text-sm font-medium transition-all duration-[200ms]'
   ].join(' '),
   {
     variants: {

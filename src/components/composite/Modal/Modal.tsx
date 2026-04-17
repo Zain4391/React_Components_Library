@@ -63,7 +63,7 @@ export function Modal({ isOpen, onClose, title, footer, size = 'md', children }:
       <div className={modalVariants({ size })} onClick={(e) => e.stopPropagation()}>
         {title && (
           <div className="px-6 py-4 border-b border-[var(--color-border)] flex justify-between items-center">
-            <h2 className="text-[var(--text-lg)] font-semibold text-[var(--color-text-primary)] m-0">
+            <h2 className="text-lg font-semibold text-[var(--color-text-primary)] m-0">
               {title}
             </h2>
             <button

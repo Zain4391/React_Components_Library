@@ -8,5 +8,7 @@ export interface ModalProps {
   title?: ReactNode;
   footer?: ReactNode;
   size?: ModalSize;
+  closeOnOverlayClick?: boolean;
+  className?: string;
   children: ReactNode;
 }

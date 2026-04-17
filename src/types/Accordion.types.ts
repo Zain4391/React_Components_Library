@@ -1,11 +1,14 @@
 import type { ReactNode } from 'react';
 
 export interface AccordionItem {
-  label: string;
+  value: string;
+  label: ReactNode;
   content: ReactNode;
+  disabled?: boolean;
 }
 
 export interface AccordionProps {
   items: AccordionItem[];
+  defaultOpen?: string[];
   allowMultiple?: boolean;
 }

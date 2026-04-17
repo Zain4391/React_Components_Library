@@ -3,3 +3,4 @@ export * from './Dropdown';
 export * from './Tabs';
 export * from './Accordion';
 export * from './Toast';
+export * from './ActionCard';

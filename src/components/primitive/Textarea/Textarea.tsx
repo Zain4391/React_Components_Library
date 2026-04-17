@@ -4,35 +4,35 @@ import type { TextareaProps } from '../../../types/Textarea.types';
 
 const textareaVariants = cva(
   [
-    'flex w-full rounded-md border text-[var(--color-text-primary)] bg-[var(--color-surface)]',
-    'transition-[border-color,box-shadow,background-color] duration-[var(--duration-fast)]',
+    'flex w-full rounded-lg border text-[var(--color-text-primary)] bg-[var(--color-surface)]',
+    'transition-[border-color,box-shadow] duration-[120ms]',
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)] focus-visible:ring-offset-2',
     'disabled:opacity-[0.45] disabled:cursor-not-allowed',
-    'placeholder:text-[var(--color-text-muted)]'
+    'placeholder:text-[var(--color-text-muted)]',
   ].join(' '),
   {
     variants: {
       variant: {
         default: 'border-[var(--color-border)] hover:border-[var(--color-border-strong)]',
-        error: 'border-[var(--color-danger)] focus-visible:ring-[var(--color-danger)] hover:border-[var(--color-danger)]',
+        error:   'border-[var(--color-danger)] focus-visible:ring-[var(--color-danger)] hover:border-[var(--color-danger)]',
       },
       textareaSize: {
-        sm: 'p-3 text-[var(--text-sm)]',
-        md: 'p-4 text-[var(--text-base)]',
-        lg: 'p-4 text-[var(--text-lg)]',
+        sm: 'p-3 text-sm',
+        md: 'p-4 text-base',
+        lg: 'p-4 text-lg',
       },
       resize: {
-        none: 'resize-none',
+        none:     'resize-none',
         vertical: 'resize-y',
-        both: 'resize',
-      }
+        both:     'resize',
+      },
     },
     defaultVariants: {
       variant: 'default',
       textareaSize: 'md',
-      resize: 'vertical'
+      resize: 'vertical',
     },
-  }
+  },
 );
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
@@ -49,20 +49,18 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       id: idProp,
       ...props
     },
-    ref
+    ref,
   ) => {
     const generatedId = useId();
-    const id = idProp || generatedId;
-
+    const id = idProp ?? generatedId;
+    const descId = `${id}-desc`;
+    const hasDesc = !!(errorMessage || helperText);
     const computedVariant = errorMessage ? 'error' : variant;
 
     return (
       <div className="flex flex-col gap-1 w-full text-left">
         {label && (
-          <label
-            htmlFor={id}
-            className="text-[var(--text-sm)] font-medium text-[var(--color-text-primary)] select-none"
-          >
+          <label htmlFor={id} className="text-sm font-medium text-[var(--color-text-primary)] select-none">
             {label}
           </label>
         )}
@@ -71,23 +69,23 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           ref={ref}
           disabled={disabled}
           aria-invalid={!!errorMessage}
+          aria-describedby={hasDesc ? descId : undefined}
           className={[
             textareaVariants({ variant: computedVariant, textareaSize, resize }),
-            className || ''
-          ].join(' ')}
+            className ?? '',
+          ].filter(Boolean).join(' ')}
           {...props}
         />
-        {(errorMessage || helperText) && (
+        {hasDesc && (
           <span
-            className={`text-[var(--text-xs)] ${
-              errorMessage ? 'text-[var(--color-danger)]' : 'text-[var(--color-text-muted)]'
-            }`}
+            id={descId}
+            className={`text-xs ${errorMessage ? 'text-[var(--color-danger)]' : 'text-[var(--color-text-muted)]'}`}
           >
-            {errorMessage || helperText}
+            {errorMessage ?? helperText}
           </span>
         )}
       </div>
     );
-  }
+  },
 );
 Textarea.displayName = 'Textarea';

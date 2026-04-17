@@ -4,29 +4,29 @@ import type { InputProps } from '../../../types/Input.types';
 
 const inputVariants = cva(
   [
-    'flex w-full items-center justify-between rounded-md border text-[var(--color-text-primary)] bg-[var(--color-surface)]',
-    'transition-[border-color,box-shadow,background-color] duration-[var(--duration-fast)]',
+    'flex w-full items-center rounded-lg border text-[var(--color-text-primary)] bg-[var(--color-surface)]',
+    'transition-[border-color,box-shadow] duration-[120ms]',
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)] focus-visible:ring-offset-2',
     'disabled:opacity-[0.45] disabled:cursor-not-allowed',
-    'placeholder:text-[var(--color-text-muted)]'
+    'placeholder:text-[var(--color-text-muted)]',
   ].join(' '),
   {
     variants: {
       variant: {
         default: 'border-[var(--color-border)] hover:border-[var(--color-border-strong)]',
-        error: 'border-[var(--color-danger)] focus-visible:ring-[var(--color-danger)] hover:border-[var(--color-danger)]',
+        error:   'border-[var(--color-danger)] focus-visible:ring-[var(--color-danger)] hover:border-[var(--color-danger)]',
       },
       inputSize: {
-        sm: 'h-8 px-3 text-[var(--text-sm)]',
-        md: 'h-10 px-4 text-[var(--text-base)]',
-        lg: 'h-12 px-4 text-[var(--text-lg)]',
+        sm: 'h-8  px-3 text-sm',
+        md: 'h-10 px-4 text-base',
+        lg: 'h-12 px-4 text-lg',
       },
     },
     defaultVariants: {
       variant: 'default',
       inputSize: 'md',
     },
-  }
+  },
 );
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -44,21 +44,18 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       id: idProp,
       ...props
     },
-    ref
+    ref,
   ) => {
     const generatedId = useId();
-    const id = idProp || generatedId;
-
-    // Auto-switch to error variant if errorMessage is provided
+    const id = idProp ?? generatedId;
+    const descId = `${id}-desc`;
+    const hasDesc = !!(errorMessage || helperText);
     const computedVariant = errorMessage ? 'error' : variant;
 
     return (
       <div className="flex flex-col gap-1 w-full text-left">
         {label && (
-          <label
-            htmlFor={id}
-            className="text-[var(--text-sm)] font-medium text-[var(--color-text-primary)] select-none"
-          >
+          <label htmlFor={id} className="text-sm font-medium text-[var(--color-text-primary)] select-none">
             {label}
           </label>
         )}
@@ -73,12 +70,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             ref={ref}
             disabled={disabled}
             aria-invalid={!!errorMessage}
+            aria-describedby={hasDesc ? descId : undefined}
             className={[
               inputVariants({ variant: computedVariant, inputSize }),
-              leftIcon ? 'pl-9' : '',
+              leftIcon  ? 'pl-9' : '',
               rightIcon ? 'pr-9' : '',
-              className || ''
-            ].join(' ')}
+              className ?? '',
+            ].filter(Boolean).join(' ')}
             {...props}
           />
           {rightIcon && (
@@ -87,17 +85,16 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             </div>
           )}
         </div>
-        {(errorMessage || helperText) && (
+        {hasDesc && (
           <span
-            className={`text-[var(--text-xs)] ${
-              errorMessage ? 'text-[var(--color-danger)]' : 'text-[var(--color-text-muted)]'
-            }`}
+            id={descId}
+            className={`text-xs ${errorMessage ? 'text-[var(--color-danger)]' : 'text-[var(--color-text-muted)]'}`}
           >
-            {errorMessage || helperText}
+            {errorMessage ?? helperText}
           </span>
         )}
       </div>
     );
-  }
+  },
 );
 Input.displayName = 'Input';

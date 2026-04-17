@@ -1,6 +1,7 @@
 export type { ButtonProps, ButtonVariant, ButtonSize } from './Button.types';
 export type { BadgeProps, BadgeVariant, BadgeSize } from './Badge.types';
 export type { CardProps, CardVariant } from './Card.types';
+export type { ActionCardProps } from './ActionCard.types';
 export * from './Input.types';
 export * from './Textarea.types';
 export * from './Avatar.types';

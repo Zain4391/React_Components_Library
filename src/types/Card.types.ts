@@ -6,5 +6,6 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   variant?: CardVariant;
   header?: ReactNode;
   footer?: ReactNode;
+  coverImage?: ReactNode;
   noPadding?: boolean;
 }

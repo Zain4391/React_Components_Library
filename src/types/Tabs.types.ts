@@ -1,12 +1,14 @@
 import type { ReactNode } from 'react';
 
 export interface TabItem {
-  label: string;
+  value: string;
+  label: ReactNode;
   content: ReactNode;
+  disabled?: boolean;
 }
 
 export interface TabsProps {
   tabs: TabItem[];
-  defaultTab?: number;
-  onChange?: (index: number) => void;
+  defaultValue?: string;
+  onChange?: (value: string) => void;
 }

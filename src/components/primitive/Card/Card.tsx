@@ -22,6 +22,7 @@ export function Card({
   variant = "default",
   header,
   footer,
+  coverImage,
   noPadding = false,
   className,
   children,
@@ -33,6 +34,11 @@ export function Card({
 
   return (
     <div {...props} className={classes}>
+      {coverImage && (
+        <div className="w-full shrink-0 flex">
+          {coverImage}
+        </div>
+      )}
       {header && (
         <div className="px-6 py-4 border-b border-(--color-border) font-medium text-(--color-text-primary)">
           {header}
@@ -41,14 +47,14 @@ export function Card({
       <div
         className={
           noPadding
-            ? "flex-1 text-(--color-text-primary)"
-            : "p-6 flex-1 text-(--color-text-primary)"
+            ? "flex-1 flex flex-col text-(--color-text-primary)"
+            : "p-6 flex-1 flex flex-col text-(--color-text-primary)"
         }
       >
         {children}
       </div>
       {footer && (
-        <div className="px-6 py-4 border-t border-(--color-border) text-(--color-text-muted)">
+        <div className="px-6 py-4 border-t border-(--color-border) text-(--color-text-muted) w-full">
           {footer}
         </div>
       )}
