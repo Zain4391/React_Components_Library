@@ -16,6 +16,11 @@ import { Modal } from "./components/composite/Modal/Modal";
 import { Dropdown } from "./components/composite/Dropdown/Dropdown";
 import { Toast } from "./components/composite/Toast/Toast";
 import { ActionCard } from "./components/composite/ActionCard";
+import { ArticleCard } from "./components/composite/ArticleCard";
+import { ProductCard } from "./components/composite/ProductCard";
+import { PricingCard } from "./components/composite/PricingCard";
+import { Navbar } from "./components/composite/Navbar";
+import { Footer } from "./components/composite/Footer";
 
 // ─── Icons ───────────────────────────────────────────────────────────────────
 
@@ -174,12 +179,12 @@ function Section({
     <section id={id} className="mb-24 scroll-mt-24">
       <div className="flex items-center gap-4 mb-8">
         <h2
-          className="text-2xl font-semibold text-[var(--color-text-primary)] tracking-tight whitespace-nowrap"
+          className="text-2xl font-semibold text-(--color-text-primary) tracking-tight whitespace-nowrap"
           style={{ margin: 0 }}
         >
           {title}
         </h2>
-        <div className="flex-1 h-px bg-[var(--color-border)]" />
+        <div className="flex-1 h-px bg-(--color-border)" />
       </div>
       <div className="flex flex-col gap-8">{children}</div>
     </section>
@@ -196,9 +201,9 @@ function Row({
   children: ReactNode;
 }) {
   return (
-    <div className="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-sm">
+    <div className="p-6 rounded-xl border border-(--color-border) bg-(--color-surface) shadow-sm">
       {label && (
-        <p className="text-xs font-semibold text-[var(--color-text-muted)] uppercase tracking-widest mb-4">
+        <p className="text-xs font-semibold text-(--color-text-muted) uppercase tracking-widest mb-4">
           {label}
         </p>
       )}
@@ -282,14 +287,14 @@ export default function App() {
     >
       {/* ── Header ── */}
       <header
-        className="sticky top-0 z-40 flex items-center justify-between px-6 md:px-12 h-16 border-b border-[var(--color-border)]"
+        className="sticky top-0 z-40 flex items-center justify-between px-6 md:px-12 h-16 border-b border-(--color-border)"
         style={{
           backgroundColor: "var(--color-surface)",
           backdropFilter: "blur(12px)",
         }}
       >
         <div className="flex items-center">
-          <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-[var(--color-accent)] text-[var(--color-text-on-accent)] font-bold text-lg shadow-sm">
+          <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-(--color-accent) text-[var(--color-text-on-accent)] font-bold text-lg shadow-sm">
             C
           </div>
           <span className="text-base font-bold text-[var(--color-text-primary)] tracking-tight">
@@ -305,7 +310,6 @@ export default function App() {
           <Button
             variant="ghost"
             size="sm"
-            leftIcon={<GithubIcon />}
             className="hidden sm:flex"
             onClick={() => window.open("https://github.com", "_blank")}
           >
@@ -374,7 +378,7 @@ export default function App() {
               >
                 Browse components
               </Button>
-              <Button variant="secondary" size="lg" leftIcon={<GithubIcon />}>
+              <Button variant="secondary" size="lg">
                 View source
               </Button>
             </div>
@@ -398,23 +402,13 @@ export default function App() {
                 <Button isLoading={loadingBtn} onClick={handleLoadDemo}>
                   {loadingBtn ? "Loading…" : "Trigger load"}
                 </Button>
-                <Button leftIcon={<PlusIcon />}>Left icon</Button>
-                <Button variant="secondary" rightIcon={<ChevronDownIcon />}>
-                  Right icon
-                </Button>
-                <Button
-                  variant="ghost"
-                  leftIcon={<MailIcon />}
-                  rightIcon={<ChevronDownIcon />}
-                >
-                  Both icons
-                </Button>
+                <Button>Left icon</Button>
+                <Button variant="secondary">icon</Button>
+                <Button variant="ghost">Both icons</Button>
                 <Button disabled>Disabled</Button>
               </Row>
               <Row label="Full width">
-                <Button fullWidth leftIcon={<PlusIcon />}>
-                  Full width button
-                </Button>
+                <Button fullWidth>Full width button</Button>
               </Row>
             </Section>
 
@@ -540,7 +534,6 @@ export default function App() {
 
                 {/* Interactive Action Card */}
                 <ActionCard
-                  icon={<MailIcon />}
                   title="Email Notifications"
                   description="Receive daily updates about your account activity, security alerts, and personalized recommendations."
                   actions={
@@ -553,6 +546,44 @@ export default function App() {
                       </Button>
                     </>
                   }
+                />
+
+                {/* Article Card */}
+                <ArticleCard
+                  imageSrc="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=600"
+                  imageAlt="Tech"
+                  category="Development"
+                  date="Apr 19, 2026"
+                  readTime="8 min read"
+                  title="Mastering Micro-frontends with React and Tailwind"
+                  excerpt="Learn how to scale your web applications by breaking them down into manageable, independent pieces using modern architecture patterns."
+                  authorName="Zain Rasool"
+                  onReadMore={() => console.log("Read more clicked")}
+                />
+                {/* Product Card */}
+                <ProductCard
+                  imageSrc="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&q=80&w=600"
+                  imageAlt="Product"
+                  title="Minimalist Analog Watch"
+                  price="$129.00"
+                  description="Matte Black / Leather Strap"
+                  onAddToCart={() => console.log("Add to cart")}
+                  onToggleFavorite={() => console.log("Toggle favorite")}
+                />
+
+                {/* Pricing Card */}
+                <PricingCard
+                  isPopular
+                  badge="Most Popular"
+                  title="Professional"
+                  price="$49"
+                  description="Perfect for growing teams and scaling startups."
+                  features={[
+                    "Unlimited Projects",
+                    { name: "Advanced SEO Tools", highlighted: true },
+                    "24/7 Priority Support",
+                  ]}
+                  onButtonClick={() => console.log("Get Started")}
                 />
 
                 {/* Image with Text */}
@@ -630,13 +661,9 @@ export default function App() {
               </Row>
               <Row label="Vertical (inside flex)">
                 <div className="flex items-center justify-center gap-6 h-12 w-full py-2">
-                  <span className="text-sm font-medium text-[var(--color-text-muted)]">
-                    Left
-                  </span>
+                  <span className="text-sm font-medium text-[var(--color-text-muted)]"></span>
                   <Divider variant="vertical" />
-                  <span className="text-sm font-medium text-[var(--color-text-muted)]">
-                    Right
-                  </span>
+                  <span className="text-sm font-medium text-[var(--color-text-muted)]"></span>
                 </div>
               </Row>
             </Section>
@@ -652,12 +679,7 @@ export default function App() {
                   />
                 </div>
                 <div className="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-sm">
-                  <Input
-                    label="With icons"
-                    placeholder="Search…"
-                    leftIcon={<SearchIcon />}
-                    rightIcon={<MailIcon />}
-                  />
+                  <Input label="With icons" placeholder="Search…" />
                 </div>
                 <div className="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-sm">
                   <Input
@@ -738,15 +760,11 @@ export default function App() {
                     Bottom
                   </button>
                 </Tooltip>
-                <Tooltip content="Appears on left" placement="left">
-                  <button className="px-4 py-2 text-sm font-medium rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-primary)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)] focus-visible:ring-offset-2 hover:bg-[var(--color-accent-subtle)] transition-colors">
-                    Left
-                  </button>
+                <Tooltip content="Appears on" placement="left">
+                  <button className="px-4 py-2 text-sm font-medium rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-primary)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)] focus-visible:ring-offset-2 hover:bg-[var(--color-accent-subtle)] transition-colors"></button>
                 </Tooltip>
-                <Tooltip content="Appears on right" placement="right">
-                  <button className="px-4 py-2 text-sm font-medium rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-primary)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)] focus-visible:ring-offset-2 hover:bg-[var(--color-accent-subtle)] transition-colors">
-                    Right
-                  </button>
+                <Tooltip content="Appears on" placement="right">
+                  <button className="px-4 py-2 text-sm font-medium rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] text-[var(--color-text-primary)] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-border-focus)] focus-visible:ring-offset-2 hover:bg-[var(--color-accent-subtle)] transition-colors"></button>
                 </Tooltip>
               </Row>
             </Section>
@@ -892,11 +910,7 @@ export default function App() {
               <Row label="Placements">
                 <Dropdown
                   placement="bottom"
-                  trigger={
-                    <Button variant="ghost" rightIcon={<ChevronDownIcon />}>
-                      Bottom (default)
-                    </Button>
-                  }
+                  trigger={<Button variant="ghost">Bottom (default)</Button>}
                   items={[
                     { label: "Edit", icon: <EditIcon />, onClick: () => {} },
                     { label: "Duplicate", onClick: () => {} },
@@ -911,11 +925,7 @@ export default function App() {
                 />
                 <Dropdown
                   placement="top"
-                  trigger={
-                    <Button variant="ghost" rightIcon={<ChevronDownIcon />}>
-                      Top
-                    </Button>
-                  }
+                  trigger={<Button variant="ghost">Top</Button>}
                   items={[
                     { label: "Option A", onClick: () => {} },
                     { label: "Option B", onClick: () => {} },
@@ -959,12 +969,243 @@ export default function App() {
                 </Button>
               </Row>
             </Section>
+
+            {/* ── Navbar ── */}
+            <Section id="navbar" title="Navbar">
+              <Row label="Default (Logo, nav, actions)">
+                <div className="relative w-full overflow-hidden rounded-xl border border-[var(--color-border)]">
+                  <Navbar
+                    logo={
+                      <div className="font-bold text-[var(--color-accent)] text-xl">
+                        Brand
+                      </div>
+                    }
+                    links={[
+                      { label: "Home", href: "#", isActive: true },
+                      { label: "Products", href: "#" },
+                      { label: "About", href: "#" },
+                    ]}
+                    actions={
+                      <>
+                        <Button variant="secondary" size="sm">
+                          Log In
+                        </Button>
+                        <Button variant="primary" size="sm">
+                          Sign Up
+                        </Button>
+                      </>
+                    }
+                  />
+                  <div className="h-32 bg-[var(--color-bg-secondary)] flex items-center justify-center text-sm text-[var(--color-text-muted)]">
+                    Page Content below Navbar
+                  </div>
+                </div>
+              </Row>
+              <Row label="Centered (Logo, center nav, actions)">
+                <div className="relative w-full overflow-hidden rounded-xl border border-[var(--color-border)]">
+                  <Navbar
+                    variant="centered"
+                    logo={
+                      <div className="font-bold text-[var(--color-accent)] text-xl">
+                        Store
+                      </div>
+                    }
+                    links={[
+                      { label: "Men", href: "#" },
+                      { label: "Women", href: "#", isActive: true },
+                      { label: "Kids", href: "#" },
+                      { label: "Sale", href: "#" },
+                    ]}
+                    actions={
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        icon={
+                          <svg
+                            width="16"
+                            height="16"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            viewBox="0 0 24 24"
+                          >
+                            <circle cx="9" cy="21" r="1" />
+                            <circle cx="20" cy="21" r="1" />
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+                          </svg>
+                        }
+                      >
+                        Cart (0)
+                      </Button>
+                    }
+                  />
+                  <div className="h-32 bg-[var(--color-bg-secondary)]" />
+                </div>
+              </Row>
+              <Row label="Search (Logo, search center, profile)">
+                <div className="relative w-full overflow-hidden rounded-xl border border-[var(--color-border)]">
+                  <Navbar
+                    variant="search"
+                    logo={
+                      <div className="font-bold text-[var(--color-accent)] text-xl">
+                        DocSite
+                      </div>
+                    }
+                    searchSlot={<Input placeholder="Search documentation..." />}
+                    links={[
+                      { label: "Docs", href: "#" },
+                      { label: "API", href: "#" },
+                    ]}
+                    actions={<Avatar size="sm" initials="JD" />}
+                  />
+                  <div className="h-32 bg-[var(--color-bg-secondary)]" />
+                </div>
+              </Row>
+            </Section>
+
+            {/* ── Footer ── */}
+            <Section id="footer" title="Footer">
+              <Row label="Simple">
+                <div className="w-full overflow-hidden rounded-xl border border-[var(--color-border)] relative">
+                  <Footer
+                    variant="simple"
+                    logo={
+                      <div className="font-bold text-[var(--color-accent)] text-lg">
+                        My App
+                      </div>
+                    }
+                    copyright="© 2026 My App Inc. Alls reserved."
+                    bottomLinks={[
+                      { label: "Privacy Policy", href: "#" },
+                      { label: "Terms of Service", href: "#" },
+                      { label: "Status", href: "#" },
+                    ]}
+                  />
+                </div>
+              </Row>
+              <Row label="Centered">
+                <div className="w-full overflow-hidden rounded-xl border border-[var(--color-border)] relative">
+                  <Footer
+                    variant="centered"
+                    logo={
+                      <div className="font-bold text-[var(--color-accent)] text-xl">
+                        Minimal
+                      </div>
+                    }
+                    description="Crafting elegant and fast digital experiences for modern teams across the globe."
+                    copyright="© 2026 Minimal Corp."
+                    bottomLinks={[
+                      { label: "Home", href: "#" },
+                      { label: "Pricing", href: "#" },
+                      { label: "About", href: "#" },
+                      { label: "Contact", href: "#" },
+                    ]}
+                    socialLinks={
+                      <>
+                        <a
+                          href="#"
+                          className="p-2 border border-[var(--color-border)] rounded-full hover:bg-[var(--color-bg-secondary)] transition-colors"
+                        >
+                          <span className="sr-only">Twitter</span>
+                          <svg
+                            className="w-4 h-4"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                          </svg>
+                        </a>
+                        <a
+                          href="#"
+                          className="p-2 border border-[var(--color-border)] rounded-full hover:bg-[var(--color-bg-secondary)] transition-colors"
+                        >
+                          <span className="sr-only">GitHub</span>
+                          <svg
+                            className="w-4 h-4"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </a>
+                      </>
+                    }
+                  />
+                </div>
+              </Row>
+              <Row label="Columns with Newsletter">
+                <div className="w-full overflow-hidden rounded-xl border border-[var(--color-border)] relative">
+                  <Footer
+                    variant="columns"
+                    logo={
+                      <div className="font-bold text-[var(--color-accent)] text-2xl">
+                        Enterprise
+                      </div>
+                    }
+                    description="A scalable solution designed for robust architectures and big teams aiming for global impact."
+                    copyright="© 2026 Enterprise Inc."
+                    columns={[
+                      {
+                        title: "Product",
+                        links: [
+                          { label: "Features", href: "#" },
+                          { label: "Integrations", href: "#" },
+                          { label: "Pricing", href: "#" },
+                          { label: "Changelog", href: "#" },
+                        ],
+                      },
+                      {
+                        title: "Resources",
+                        links: [
+                          { label: "Documentation", href: "#" },
+                          { label: "API Reference", href: "#" },
+                          { label: "Community", href: "#" },
+                          { label: "Blog", href: "#" },
+                        ],
+                      },
+                      {
+                        title: "Company",
+                        links: [
+                          { label: "About Us", href: "#" },
+                          { label: "Careers", href: "#" },
+                          { label: "Legal", href: "#" },
+                          { label: "Contact", href: "#" },
+                        ],
+                      },
+                    ]}
+                    newsletterSlot={
+                      <div className="space-y-4">
+                        <h3 className="text-sm font-semibold tracking-wider text-[var(--color-text-primary)]">
+                          Subscribe to our newsletter
+                        </h3>
+                        <p className="text-sm">
+                          The latest news, articles, and resources, sent to your
+                          inbox weekly.
+                        </p>
+                        <div className="flex gap-2">
+                          <Input
+                            placeholder="Enter your email"
+                            type="email"
+                            className="flex-1"
+                          />
+                          <Button variant="primary">Subscribe</Button>
+                        </div>
+                      </div>
+                    }
+                  />
+                </div>
+              </Row>
+            </Section>
           </div>
         </main>
       </div>
 
       {/* ── Toast stack ── */}
-      <div className="fixed bottom-6 right-6 flex flex-col gap-3 z-[100]">
+      <div className="fixed bottom-6-6 flex flex-col gap-3 z-[100]">
         {toasts.map((t) => (
           <Toast
             key={t.id}
